@@ -1,0 +1,13 @@
+{
+  "name": "eg-core",
+  "version": "1.0.0",
+  "description": "Example app and shared library for Angular plugin architecture",
+  "scripts": {
+    "ng": "ng"
+  },
+  "author": "Robert St. John",
+  "license": "MIT",
+  "devDependencies": {
+    "@angular/cli": "^8.3.29"
+  }
+}
