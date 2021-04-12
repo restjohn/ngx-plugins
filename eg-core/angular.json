@@ -124,6 +124,41 @@
           }
         }
       }
+    },
+    "eg-core-lib": {
+      "projectType": "library",
+      "root": "projects/eg-core-lib",
+      "sourceRoot": "projects/eg-core-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/eg-core-lib/tsconfig.lib.json",
+            "project": "projects/eg-core-lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/eg-core-lib/src/test.ts",
+            "tsConfig": "projects/eg-core-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/eg-core-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/eg-core-lib/tsconfig.lib.json",
+              "projects/eg-core-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "eg-core"
 }
