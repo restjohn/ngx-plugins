@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "eg-plugin1": [
+        "dist/eg-plugin1"
+      ],
+      "eg-plugin1/*": [
+        "dist/eg-plugin1/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
