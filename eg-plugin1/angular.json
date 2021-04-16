@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/eg-plugin1",
       "sourceRoot": "projects/eg-plugin1/src",
-      "prefix": "lib",
+      "prefix": "p1",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-eg-plugin1',
+  selector: 'p1-eg-plugin1',
   template: `
     <p>
       eg-plugin1 works!
