@@ -16,7 +16,7 @@ export class EgCoreLibService {
         let remaining = 10
         while (remaining--) {
           items.unshift({
-            id: `eg${remaining}`,
+            id: `eg-${remaining}`,
             name: `E.g. Item ${remaining}`
           })
         }

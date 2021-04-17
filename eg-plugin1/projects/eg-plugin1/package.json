@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^9.1.13",
-    "@angular/core": "^9.1.13"
+    "@angular/core": "^9.1.13",
+    "@ng-plugins/eg-core-lib": "~0.0.1"
   }
 }
