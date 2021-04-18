@@ -7,6 +7,6 @@
   </ul>
 </div>
 <div class="plugins">
-  <eg-plugin-content *ngFor="let plugin of plugins"></eg-plugin-content>
+  <eg-plugin-content *ngFor="let plugin of plugins" [pluginId]="plugin"></eg-plugin-content>
 </div>
 <router-outlet></router-outlet>
