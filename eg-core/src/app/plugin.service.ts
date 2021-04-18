@@ -39,7 +39,6 @@ export class PluginService {
   constructor(private compiler: Compiler, private injector: Injector, private app: PlatformRef) { }
 
   async loadPlugin(id: string): Promise<ResolvedPlugin> {
-    // TODO: systemjs import
     const pluginHandle: PluginModule = await system.import(id)
     console.log('imported plugin', pluginHandle)
     const moduleFactory = await this.compiler.compileModuleAsync(pluginHandle.plugin.module)
@@ -55,6 +54,10 @@ export interface ResolvedPlugin extends EgPlugin {
   moduleRef: NgModuleRef<unknown>
 }
 
+/*
+The following type definitions are adaptations from
+https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/systemjs
+*/
 // Type definitions for SystemJS 6.1
 // Project: https://github.com/systemjs/systemjs
 // Definitions by: Joel Denning <https://github.com/joeldenning>
