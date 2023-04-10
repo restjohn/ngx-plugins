@@ -5,8 +5,8 @@
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/common": "^9.1.13",
-    "@angular/core": "^9.1.13",
+    "@angular/common": "~10.2.5",
+    "@angular/core": "~10.2.5",
     "@ng-plugins/eg-core-lib": "~0.0.1"
   }
 }
