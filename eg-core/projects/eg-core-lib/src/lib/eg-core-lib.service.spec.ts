@@ -6,7 +6,7 @@ describe('EgCoreLibService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: EgCoreLibService = TestBed.get(EgCoreLibService);
+    const service: EgCoreLibService = TestBed.inject(EgCoreLibService);
     expect(service).toBeTruthy();
   });
 });

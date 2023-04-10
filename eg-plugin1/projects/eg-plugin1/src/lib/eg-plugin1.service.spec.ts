@@ -6,7 +6,7 @@ describe('EgPlugin1Service', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: EgPlugin1Service = TestBed.get(EgPlugin1Service);
+    const service: EgPlugin1Service = TestBed.inject(EgPlugin1Service);
     expect(service).toBeTruthy();
   });
 });
