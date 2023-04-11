@@ -103,7 +103,7 @@ interface SystemJS {
    * the registry, null is returned.
    */
   get(moduleId: string): SystemJS.Module | null;
-  // tslint:disable-next-line no-unnecessary-generics
+  // eslint-disable-next-line  
   get<T>(moduleId: string): T | null;
 
   /**
@@ -125,7 +125,7 @@ interface SystemJS {
 }
 
 declare namespace SystemJS {
-  // tslint:disable-next-line no-unnecessary-generics
+  // eslint-disable-next-line  
   type ImportFn = <T extends Module>(moduleId: string, parentUrl?: string) => Promise<T>;
 
   type DeclareFn = (_export: ExportFn, _context: Context) => Declare;
@@ -145,7 +145,7 @@ declare namespace SystemJS {
 
   type GetFn = GetFnModule | GetFnGeneric;
   type GetFnModule = (moduleId: string) => Module;
-  // tslint:disable-next-line no-unnecessary-generics
+  // eslint-disable-next-line 
   type GetFnGeneric = <T>(moduleId: string) => T;
 
   interface Context {
