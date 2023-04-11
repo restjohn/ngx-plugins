@@ -1,6 +1,6 @@
 {
   "name": "@ng-plugins/eg-core-lib",
-  "version": "0.0.1",
+  "version": "12.0.0",
   "dependencies": {
     "tslib": "^2.0.0"
   },
