@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { EgCoreLibComponent } from './eg-core-lib.component';
 
@@ -6,7 +6,7 @@ describe('EgCoreLibComponent', () => {
   let component: EgCoreLibComponent;
   let fixture: ComponentFixture<EgCoreLibComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ EgCoreLibComponent ]
     })
