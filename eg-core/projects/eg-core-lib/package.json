@@ -1,11 +1,11 @@
 {
   "name": "@ng-plugins/eg-core-lib",
-  "version": "12.0.0",
+  "version": "13.0.0",
   "dependencies": {
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/common": "~12.2.17",
-    "@angular/core": "~12.2.17"
+    "@angular/common": "~13.4.0",
+    "@angular/core": "~13.4.0"
   }
 }
