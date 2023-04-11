@@ -129,7 +129,7 @@
         }
       }
     },
-    "@ng-plugins/eg-core-lib": {
+    "eg-core-lib": {
       "projectType": "library",
       "root": "projects/eg-core-lib",
       "sourceRoot": "projects/eg-core-lib/src",
