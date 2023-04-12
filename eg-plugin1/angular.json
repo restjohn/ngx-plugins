@@ -28,8 +28,21 @@
             "tsConfig": "projects/eg-plugin1/tsconfig.spec.json",
             "karmaConfig": "projects/eg-plugin1/karma.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/eg-plugin1/**/*.ts",
+              "projects/eg-plugin1/**/*.html"
+            ]
+          }
         }
       }
-    }},
-  "defaultProject": "eg-plugin1"
+    }
+  },
+  "defaultProject": "eg-plugin1",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
