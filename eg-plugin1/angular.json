@@ -41,8 +41,9 @@
       }
     }
   },
-  "defaultProject": "eg-plugin1",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
