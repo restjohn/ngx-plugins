@@ -20,10 +20,10 @@
     ],
     "paths": {
       "@ng-plugins/eg-core-lib": [
-        "dist/ng-plugins/eg-core-lib"
+        "dist/eg-core-lib"
       ],
       "@ng-plugins/eg-core-lib/*": [
-        "dist/ng-plugins/eg-core-lib/*"
+        "dist/eg-core-lib/*"
       ]
     }
   },
