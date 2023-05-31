@@ -52,7 +52,7 @@
       "prefix": "egp1",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "ngx-build-plus:browser",
           "options": {
             "outputPath": "dist/main",
             "index": "projects/main/src/index.html",
@@ -67,7 +67,9 @@
             "styles": [
               "projects/main/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "extraWebpackConfig": "projects/main/webpack.config.js",
+            "commonChunk": false
           },
           "configurations": {
             "production": {
@@ -89,7 +91,8 @@
                   "with": "projects/main/src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "extraWebpackConfig": "projects/main/webpack.prod.config.js"
             },
             "development": {
               "buildOptimizer": false,
@@ -103,21 +106,28 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "ngx-build-plus:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "main:build:production"
+              "browserTarget": "main:build:production",
+              "extraWebpackConfig": "projects/main/webpack.prod.config.js"
             },
             "development": {
               "browserTarget": "main:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4201,
+            "publicHost": "http://localhost:4201",
+            "extraWebpackConfig": "projects/main/webpack.config.js"
+          }
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "ngx-build-plus:extract-i18n",
           "options": {
-            "browserTarget": "main:build"
+            "browserTarget": "main:build",
+            "extraWebpackConfig": "projects/main/webpack.config.js"
           }
         },
         "test": {
