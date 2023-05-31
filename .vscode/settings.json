@@ -1,0 +1,6 @@
+{
+  "eslint.workingDirectories": [
+    "./eg-core",
+    "./eg-plugin1"
+  ]
+}
