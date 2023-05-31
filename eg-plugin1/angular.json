@@ -49,7 +49,7 @@
       },
       "root": "projects/main",
       "sourceRoot": "projects/main/src",
-      "prefix": "app",
+      "prefix": "egp1",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
