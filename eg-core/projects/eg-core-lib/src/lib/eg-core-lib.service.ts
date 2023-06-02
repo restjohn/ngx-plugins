@@ -22,7 +22,7 @@ export class EgCoreLibService {
         }
         subscriber.next(items)
         subscriber.complete()
-      }, 0)
+      }, 350)
       return new Subscription(() => {
         clearTimeout(timeout)
       })
