@@ -5,11 +5,12 @@ module.exports = withModuleFederationPlugin({
   name: 'main',
 
   exposes: {
-    './eg-hooks': './projects/main/src/app/eg-plugin.hooks.ts',
+    './EgPlugin': './projects/main/src/app/eg-plugin.hooks.ts',
   },
 
   shared: {
     ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+    '@ng-plugins/eg-core-lib': { singleton: true, strictVersion: true, requiredVersion: '^14.0.0' }
   },
 
 });
