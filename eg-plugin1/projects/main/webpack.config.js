@@ -5,7 +5,7 @@ module.exports = withModuleFederationPlugin({
   name: 'main',
 
   exposes: {
-    './Component': './projects/main/src/app/app.component.ts',
+    './eg-hooks': './projects/main/src/app/eg-plugin.hooks.ts',
   },
 
   shared: {
