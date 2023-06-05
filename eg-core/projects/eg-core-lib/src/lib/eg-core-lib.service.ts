@@ -7,7 +7,9 @@ import { EgItem } from './eg-core.model'
 })
 export class EgCoreLibService {
 
-  constructor() { }
+  constructor() {
+    console.info('create core service')
+  }
 
   fetchSomeItems(): Observable<EgItem[]> {
     return new Observable<EgItem[]>(subscriber => {
