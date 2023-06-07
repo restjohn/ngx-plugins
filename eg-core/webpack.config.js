@@ -1,56 +1,26 @@
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+// const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const mf = require("@angular-architects/module-federation/webpack");
 const path = require("path");
 const share = mf.share;
 
-const sharedMappings = new mf.SharedMappings();
-sharedMappings.register(
-  path.join(__dirname, 'tsconfig.json'),
-  [/* mapped paths to share */]);
+const mfBase = mf.withModuleFederationPlugin({
+  sharedMappings: [
+    '@ng-plugins/eg-core-lib'
+  ],
+  shared: share({
+    "@angular/core": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: false },
+    "@angular/common": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: false },
+    "@angular/common/http": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: false },
+    "@angular/router": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: false },
+    "rxjs": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: false },
+  }),
+})
 
 module.exports = {
-  output: {
-    uniqueName: "egCore",
-    publicPath: "auto"
-  },
-  optimization: {
-    runtimeChunk: false
-  },   
-  resolve: {
-    alias: {
-      ...sharedMappings.getAliases(),
+  ...mfBase,
+  devServer: {
+    static: {
+      directory: path.join(process.cwd(), 'plugins')
     }
   },
-  experiments: {
-    outputModule: true
-  },
-  plugins: [
-    new ModuleFederationPlugin({
-        library: { type: "module" },
-
-        // For remotes (please adjust)
-        // name: "egCore",
-        // filename: "remoteEntry.js",
-        // exposes: {
-        //     './Component': './/src/app/app.component.ts',
-        // },        
-        
-        // For hosts (please adjust)
-        // remotes: {
-        //     "mfe1": "http://localhost:3000/remoteEntry.js",
-
-        // },
-
-        shared: share({
-          "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
-          "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-
-          ...sharedMappings.getDescriptors()
-        })
-        
-    }),
-    sharedMappings.getPlugin()
-  ],
-};
+}
