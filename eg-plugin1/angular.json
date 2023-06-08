@@ -55,7 +55,7 @@
           "builder": "ngx-build-plus:browser",
           "options": {
             "outputPath": "dist/main",
-            "index": "projects/main/src/index.html",
+            "index": "",
             "main": "projects/main/src/main.ts",
             "polyfills": "projects/main/src/polyfills.ts",
             "tsConfig": "projects/main/tsconfig.app.json",
