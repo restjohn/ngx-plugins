@@ -69,7 +69,8 @@
             ],
             "scripts": [],
             "extraWebpackConfig": "projects/main/webpack.config.js",
-            "commonChunk": false
+            "commonChunk": false,
+            "plugin": "~/post_build.js"
           },
           "configurations": {
             "production": {
