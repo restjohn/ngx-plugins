@@ -17,6 +17,7 @@ export class PluginContentComponent implements OnInit, OnChanges {
   constructor(private pluginService: PluginService, private injector: Injector) { }
 
   ngOnInit(): void {
+    console.info(`init plugin ${this.pluginId}`)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -27,10 +28,14 @@ export class PluginContentComponent implements OnInit, OnChanges {
       // TODO: render no content view
       return
     }
+    console.info(`loading content of plugin ${this.pluginId}`)
     this.pluginService.loadPlugin(this.pluginId).then(plugin => {
-      const moduleRef = plugin.moduleRef
-      const componentFactory = moduleRef.componentFactoryResolver.resolveComponentFactory(plugin.component)
-      this.pluginView.createComponent(componentFactory)
+      console.info(`create plugin ${this.pluginId} component ${String(plugin.component)}`)
+      // const moduleRef = plugin.moduleRef
+      // const componentFactory = moduleRef.componentFactoryResolver.resolveComponentFactory(plugin.component)
+      // this.pluginView.createComponent(componentFactory)
+      // this.pluginView.createComponent(plugin.component, { ngModuleRef: plugin.moduleRef })
+      this.pluginView.createComponent(plugin.component)
     });
   }
 }
