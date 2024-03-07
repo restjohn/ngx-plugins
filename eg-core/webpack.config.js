@@ -8,11 +8,11 @@ const mfBase = mf.withModuleFederationPlugin({
     '@ng-plugins/eg-core-lib'
   ],
   shared: share({
-    "@angular/core": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: false },
-    "@angular/common": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: false },
-    "@angular/common/http": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: false },
-    "@angular/router": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: false },
-    "rxjs": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: false },
+    "@angular/core": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: true, pinned: true },
+    "@angular/common": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: true, pinned: true },
+    "@angular/common/http": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: true, pinned: true },
+    "@angular/router": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: true, pinned: true },
+    "rxjs": { singleton: true, strictVersion: false, requiredVersion: 'auto', eager: true, pinned: true },
   }),
 })
 
