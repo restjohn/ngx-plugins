@@ -23,7 +23,7 @@ export class PluginService {
     const pluginHandle: EgPlugin = await loadRemoteModule({
       type: 'module',
       remoteEntry: id,
-      exposedModule: 'EgPlugin'
+      exposedModule: 'eg-plugin.hooks'
     }).then(x => x.plugin)
     console.log('imported plugin', pluginHandle)
     // TODO: is this even necessary? see https://angular.io/guide/deprecations#jit-api-changes.

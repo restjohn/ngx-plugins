@@ -14,9 +14,4 @@ const plugin: EgPlugin = {
   component: EgPlugin1Component
 }
 
-/**
- * TODO: tried to `export default ...` here but for some reason the umd
- * bundle from ng-packagr just creates a variable for the default export
- * then never actually exports anything.
- */
 export { plugin }
