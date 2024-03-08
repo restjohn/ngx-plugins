@@ -3,43 +3,6 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "eg-plugin1": {
-      "projectType": "library",
-      "root": "projects/eg-plugin1",
-      "sourceRoot": "projects/eg-plugin1/src",
-      "prefix": "p1",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "projects/eg-plugin1/tsconfig.lib.json",
-            "project": "projects/eg-plugin1/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/eg-plugin1/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/eg-plugin1/src/test.ts",
-            "tsConfig": "projects/eg-plugin1/tsconfig.spec.json",
-            "karmaConfig": "projects/eg-plugin1/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/eg-plugin1/**/*.ts",
-              "projects/eg-plugin1/**/*.html"
-            ]
-          }
-        }
-      }
-    },
     "main": {
       "projectType": "application",
       "schematics": {
