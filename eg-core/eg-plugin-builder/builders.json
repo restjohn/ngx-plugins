@@ -1,0 +1,9 @@
+{
+  "builders": {
+    "amd": {
+      "implementation": "./lib/fesm-amd.js",
+      "description": "Create an AMD module bundle from an ng-packagr FESM bundle.",
+      "schema": "./schema.json"
+    }
+  }
+}

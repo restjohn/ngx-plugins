@@ -1,0 +1,26 @@
+{
+  "name": "@ng-plugins/eg-plugin-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "files": [
+    "lib/",
+    "builders.json"
+  ],
+  "builders": "builders.json",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.8.4"
+  },
+  "peerDependencies": {
+    "@angular-devkit/architect": "^0.1402.13",
+    "@angular-devkit/build-angular": "^14.2.13",
+    "rollup": "^4.13.0"
+  }
+}
