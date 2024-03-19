@@ -96,7 +96,8 @@ function rollupFesmToAmd(options, context) {
                                 context.logger.info("test module id ".concat(moduleId));
                                 return false
                                     || moduleId.startsWith('@angular/')
-                                    || moduleId.startsWith('@ng-plugins/');
+                                    || moduleId.startsWith('@ng-plugins/')
+                                    || /^rxjs(\/.+)/.test(moduleId);
                             }
                         })];
                 case 3:

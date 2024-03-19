@@ -32,6 +32,7 @@ async function rollupFesmToAmd(options: any, context: BuilderContext): Promise<B
         return false
           || moduleId.startsWith('@angular/')
           || moduleId.startsWith('@ng-plugins/')
+          || /^rxjs(\/.+)/.test(moduleId)
       }
     })
     const rolled = await roller.write({
