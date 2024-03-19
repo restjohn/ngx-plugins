@@ -122,6 +122,46 @@
           }
         }
       }
+    },
+    "eg-plugin1-lib": {
+      "projectType": "library",
+      "root": "projects/eg-plugin1-lib",
+      "sourceRoot": "projects/eg-plugin1-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/eg-plugin1-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/eg-plugin1-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/eg-plugin1-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/eg-plugin1-lib/src/test.ts",
+            "tsConfig": "projects/eg-plugin1-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/eg-plugin1-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/eg-plugin1-lib/**/*.ts",
+              "projects/eg-plugin1-lib/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

@@ -19,6 +19,9 @@
       "dom"
     ],
     "paths": {
+      "eg-plugin1-lib": [
+        "dist/eg-plugin1-lib"
+      ]
     }
   },
   "angularCompilerOptions": {
