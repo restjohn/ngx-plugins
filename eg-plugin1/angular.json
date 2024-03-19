@@ -130,7 +130,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@ng-plugins/eg-plugin-builder:amd",
           "options": {
             "project": "projects/eg-plugin1-lib/ng-package.json"
           },
