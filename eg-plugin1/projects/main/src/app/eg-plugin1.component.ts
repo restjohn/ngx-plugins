@@ -3,10 +3,10 @@ import { EgItem } from '@ng-plugins/eg-core-lib';
 import { EgPlugin1Service } from './eg-plugin1.service'
 
 @Component({
-  selector: 'egp1-eg-plugin1',
+  selector: 'app-eg-plugin1',
   template: `
     <ul>
-      <li *ngFor="let item of items">Plugin 1 decortated item {{item.id}}</li>
+      <li *ngFor="let item of items">{{item.id}}: {{item.name}}</li>
     </ul>
   `,
   styles: []
@@ -15,10 +15,10 @@ export class EgPlugin1Component implements OnInit {
 
   items: EgItem[]
 
-  constructor(private coreService: EgPlugin1Service) { }
+  constructor(private service: EgPlugin1Service) { }
 
   ngOnInit() {
-    this.coreService.pluginItems$.subscribe(x => {
+    this.service.pluginItems$.subscribe(x => {
       this.items = x
     })
   }

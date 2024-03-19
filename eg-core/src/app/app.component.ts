@@ -11,7 +11,8 @@ export class AppComponent implements OnInit {
   title = 'Angular Dynamic Plugins';
   items: EgItem[] = []
   plugins: string[] = [
-    '/eg-plugin1/remoteEntry.js'
+    'mf:/eg-plugin1/main/remoteEntry.js',
+    'amd:/eg-plugin1/eg-plugin1-lib/eg-plugin1-lib.fesm2020.amd.js'
   ]
 
   constructor(private sharedService: EgCoreLibService) {}
