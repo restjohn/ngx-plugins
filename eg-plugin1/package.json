@@ -26,8 +26,9 @@
     "@angular/platform-browser-dynamic": "^14.3.0",
     "@angular/router": "^14.3.0",
     "@ng-plugins/eg-core-lib": "^14.0.0",
-    "rxjs": "~6.6.7",
+    "rxjs": "^7.8.1",
     "tslib": "^2.0.0",
+    "xml-js": "^1.6.11",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

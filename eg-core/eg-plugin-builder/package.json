@@ -22,5 +22,9 @@
     "@angular-devkit/architect": "^0.1402.13",
     "@angular-devkit/build-angular": "^14.2.13",
     "rollup": "^4.13.0"
+  },
+  "dependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3"
   }
 }

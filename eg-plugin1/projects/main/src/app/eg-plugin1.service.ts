@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EgCoreLibService, EgItem } from '@ng-plugins/eg-core-lib'
-import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { Observable, map } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'

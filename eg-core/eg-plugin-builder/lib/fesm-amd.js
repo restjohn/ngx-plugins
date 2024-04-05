@@ -58,19 +58,29 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 exports.__esModule = true;
 var path = __importStar(require("path"));
 var build_angular_1 = require("@angular-devkit/build-angular");
 var architect_1 = require("@angular-devkit/architect");
 var rxjs_1 = require("rxjs");
+var operators_1 = require("rxjs/operators");
 var rollup_1 = require("rollup");
 var discover_packages_1 = require("ng-packagr/lib/ng-package/discover-packages");
+var plugin_node_resolve_1 = require("@rollup/plugin-node-resolve");
+var plugin_commonjs_1 = __importDefault(require("@rollup/plugin-commonjs"));
 function ngPackagrThenAmd(options, context) {
-    return (0, rxjs_1.concat)((0, build_angular_1.executeNgPackagrBuilder)(options, context), (0, rxjs_1.defer)(function () { return rollupFesmToAmd(options, context); }));
+    return (0, rxjs_1.concat)((0, build_angular_1.executeNgPackagrBuilder)(options, context).pipe((0, operators_1.tap)(function (x) {
+        if (x.error) {
+            context.logger.error(x.error);
+        }
+    })), (0, rxjs_1.defer)(function () { return rollupFesmToAmd(options, context); }));
 }
 function rollupFesmToAmd(options, context) {
     return __awaiter(this, void 0, void 0, function () {
-        var root, ngPackagePath, packages, destDir, fesm2020Path, fesm2020UmdName, fesm2020UmdPath, roller, rolled, _i, _a, rollOut, err_1;
+        var root, ngPackagePath, packages, destDir, fesm2020Path, fesm2020UmdName, fesm2020AmdPath, roller, rolled, _i, _a, rollOut, err_1;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -82,29 +92,35 @@ function rollupFesmToAmd(options, context) {
                     destDir = packages.dest;
                     fesm2020Path = packages.primary.destinationFiles.fesm2020;
                     fesm2020UmdName = "".concat(packages.primary.flatModuleFile, ".fesm2020.amd.js");
-                    fesm2020UmdPath = path.resolve(destDir, fesm2020UmdName);
-                    context.logger.info("rolling FESM2020 to UMD ".concat(JSON.stringify({
+                    fesm2020AmdPath = path.resolve(destDir, fesm2020UmdName);
+                    context.logger.info("rolling FESM2020 to AMD ".concat(JSON.stringify({
                         fesm2020Path: fesm2020Path,
-                        fesm2020UmdPath: fesm2020UmdPath
+                        fesm2020AmdPath: fesm2020AmdPath
                     }, null, 2)));
                     _b.label = 2;
                 case 2:
                     _b.trys.push([2, 5, , 6]);
                     return [4 /*yield*/, (0, rollup_1.rollup)({
                             input: fesm2020Path,
-                            external: function (moduleId) {
-                                context.logger.info("test module id ".concat(moduleId));
-                                return false
-                                    || moduleId.startsWith('@angular/')
-                                    || moduleId.startsWith('@ng-plugins/')
-                                    || /^rxjs(\/.+)/.test(moduleId);
-                            }
+                            plugins: [
+                                (0, plugin_node_resolve_1.nodeResolve)({
+                                    resolveOnly: function (moduleId) {
+                                        var external = false
+                                            || moduleId.startsWith('@angular/')
+                                            || moduleId.startsWith('@ng-plugins/')
+                                            || /^rxjs(\/.+)?/.test(moduleId);
+                                        return !external;
+                                    },
+                                    preferBuiltins: false
+                                }),
+                                (0, plugin_commonjs_1["default"])()
+                            ]
                         })];
                 case 3:
                     roller = _b.sent();
                     return [4 /*yield*/, roller.write({
                             format: 'amd',
-                            file: fesm2020UmdPath
+                            file: fesm2020AmdPath
                         })];
                 case 4:
                     rolled = _b.sent();
@@ -117,6 +133,8 @@ function rollupFesmToAmd(options, context) {
                         }];
                 case 5:
                     err_1 = _b.sent();
+                    context.logger.error('error creating amd module from fesm: ' + err_1);
+                    console.error(err_1);
                     return [2 /*return*/, {
                             success: false,
                             error: err_1

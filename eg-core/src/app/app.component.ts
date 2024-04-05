@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   items: EgItem[] = []
   plugins: string[] = [
     'mf:/eg-plugin1/main/remoteEntry.js',
-    'amd:/eg-plugin1/eg-plugin1-lib/eg-plugin1-lib.fesm2020.amd.js'
+    'amd:/eg-plugin1/eg-plugin1-lib/ng-plugins-eg-plugin1-lib.fesm2020.amd.js'
   ]
 
   constructor(private sharedService: EgCoreLibService) {}

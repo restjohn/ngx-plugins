@@ -3,6 +3,13 @@ import { EgPlugin } from '@ng-plugins/eg-core-lib';
 import { loadRemoteModule } from '@angular-architects/module-federation'
 import * as ngCore from '@angular/core'
 import * as ngCommon from '@angular/common'
+import * as ngPlatformBrowser from '@angular/platform-browser'
+import * as ngAnimations from '@angular/animations'
+import * as ngCdk from '@angular/cdk'
+import * as ngCdkA11y from '@angular/cdk/a11y'
+import * as ngCdkCoercion from '@angular/cdk/coercion'
+import * as ngCdkLayout from '@angular/cdk/layout'
+import * as ngRouter from '@angular/router'
 import * as egCoreLib from '@ng-plugins/eg-core-lib'
 import * as rxjs from 'rxjs'
 import * as rxjsOperators from 'rxjs/operators'
@@ -19,6 +26,55 @@ system.register('@angular/common', [], _export => {
   return {
     execute: () => {
       _export(ngCommon)
+    }
+  }
+})
+system.register('@angular/platform-browser', [], _export => {
+  return {
+    execute: () => {
+      _export(ngPlatformBrowser)
+    }
+  }
+})
+system.register('@angular/animations', [], _export => {
+  return {
+    execute: () => {
+      _export(ngAnimations)
+    }
+  }
+})
+system.register('@angular/cdk', [], _export => {
+  return {
+    execute: () => {
+      _export(ngCdk)
+    }
+  }
+})
+system.register('@angular/cdk/a11y', [], _export => {
+  return {
+    execute: () => {
+      _export(ngCdkA11y)
+    }
+  }
+})
+system.register('@angular/cdk/coercion', [], _export => {
+  return {
+    execute: () => {
+      _export(ngCdkCoercion)
+    }
+  }
+})
+system.register('@angular/cdk/layout', [], _export => {
+  return {
+    execute: () => {
+      _export(ngCdkLayout)
+    }
+  }
+})
+system.register('@angular/router', [], _export => {
+  return {
+    execute: () => {
+      _export(ngRouter)
     }
   }
 })
