@@ -14,6 +14,7 @@
   "dependencies": {
     "@angular-architects/module-federation": "^14.3.14",
     "@angular/animations": "^14.3.0",
+    "@angular/cdk": "^14.2.7",
     "@angular/common": "^14.3.0",
     "@angular/compiler": "^14.3.0",
     "@angular/core": "^14.3.0",
@@ -21,7 +22,7 @@
     "@angular/platform-browser": "^14.3.0",
     "@angular/platform-browser-dynamic": "^14.3.0",
     "@angular/router": "^14.3.0",
-    "rxjs": "~6.6.7",
+    "rxjs": "^7.8.1",
     "systemjs": "^6.14.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
