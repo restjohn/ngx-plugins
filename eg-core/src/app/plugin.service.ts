@@ -1,4 +1,4 @@
-import { Injectable, Compiler, Injector, PlatformRef, NgModuleRef } from '@angular/core';
+import { Injectable, PlatformRef } from '@angular/core';
 import { EgPlugin } from '@ng-plugins/eg-core-lib';
 import { loadRemoteModule } from '@angular-architects/module-federation'
 import * as ngCore from '@angular/core'
