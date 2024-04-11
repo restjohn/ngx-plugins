@@ -1,0 +1,18 @@
+{
+  "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "extends": [
+    "@schematics/angular"
+  ],
+  "schematics": {
+    "ng-add": {
+      "description": "Install the library to the target project.",
+      "factory": "./ng-add/index#ngAdd",
+      "extends": "@schematics/angular:add"
+    },
+    "eg-plugin-lib": {
+      "description": "Generate a new eg-plugin library project.",
+      "extends": "@schematics/angular:library",
+      "factory": "./eg-plugin-lib/index#egPluginLib"
+    }
+  }
+}

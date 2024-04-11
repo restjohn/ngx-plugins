@@ -9,5 +9,9 @@
     "@angular/core": "^14.3.0",
     "@angular/cdk": "^14.2.0",
     "rxjs": "^7.4.0"
+  },
+  "schematics": "./schematics/collection.json",
+  "ng-add": {
+    "save": "devDependencies"
   }
 }
