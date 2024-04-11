@@ -1,4 +1,4 @@
-# @eg2/egPlugin2
+# @eg2/egPlugin2Workspace
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.10.
 
