@@ -6,8 +6,7 @@
   "schematics": {
     "ng-add": {
       "description": "Install the library to the target project.",
-      "factory": "./ng-add/index#ngAdd",
-      "extends": "@schematics/angular:add"
+      "factory": "./ng-add/index#ngAdd"
     },
     "eg-plugin-lib": {
       "description": "Generate a new eg-plugin library project.",
