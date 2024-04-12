@@ -25,6 +25,7 @@
   "devDependencies": {
     "@angular/cli": "~14.2.10",
     "@angular/compiler-cli": "^14.2.0",
+    "@ng-plugins/eg-core-lib": "file:../eg-core/dist/eg-core-lib",
     "@types/jasmine": "~4.0.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
