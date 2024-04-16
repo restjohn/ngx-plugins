@@ -3,5 +3,36 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "@eg2/plugin1": {
+      "projectType": "library",
+      "root": "projects/eg2/plugin1",
+      "sourceRoot": "projects/eg2/plugin1/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@ng-plugins/eg-plugin-builder:amd",
+          "options": {
+            "project": "projects/eg2/plugin1/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/eg2/plugin1/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/eg2/plugin1/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/eg2/plugin1/src/test.ts",
+            "tsConfig": "projects/eg2/plugin1/tsconfig.spec.json",
+            "karmaConfig": "projects/eg2/plugin1/karma.conf.js"
+          }
+        }
+      }
+    }
   }
 }
