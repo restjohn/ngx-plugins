@@ -12,6 +12,5 @@ export * from './lib/eg-core-lib.module'
 export interface EgPlugin {
   id: string
   title: string
-  module: Type<unknown>
   component: Type<unknown>
 }
