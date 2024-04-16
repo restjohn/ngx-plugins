@@ -2,7 +2,7 @@ import { Rule, chain, externalSchematic, SchematicsException,  } from '@angular-
 import { Schema as BaseLibraryOptions } from '@schematics/angular/library/schema'
 import { getWorkspace, updateWorkspace,  } from '@schematics/angular/utility/workspace'
 import { insertImport, insertAfterLastOccurrence, findNodes } from '@schematics/angular/utility/ast-utils'
-import { applyToUpdateRecorder } from '@schematics/angular/utility/change'
+import { applyToUpdateRecorder, NoopChange } from '@schematics/angular/utility/change'
 import * as ts from '@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript'
 import { JsonObject } from '@angular-devkit/core'
 
@@ -11,16 +11,25 @@ function addPluginHookToEntryPoint(options: EgPluginLibraryOptions): Rule {
   if (!entryFile) {
     throw new SchematicsException('missing entryFile')
   }
-  return async (tree, context) => {
+  return async (tree, _context) => {
     const workspace = await getWorkspace(tree)
     const project = workspace.projects.get(options.name)
     if (!project) {
       throw new SchematicsException(`project not found in workspace: ${project}`)
     }
+    const libDirPath = `${project.sourceRoot}/lib`
+    const libDir = tree.getDir(libDirPath)
+    const componentFileName = libDir.subfiles.find(x => /\.component\.ts$/.test(x)) || ''
+    const componentFilePath = `${libDirPath}/${componentFileName}`
+    const componentFileText = tree.readText(`${libDirPath}/${componentFileName}`)
+    const componentSource = ts.createSourceFile(componentFilePath, componentFileText, ts.ScriptTarget.Latest, true)
+    const componentClassDecl = findNodes(componentSource, ts.SyntaxKind.ClassDeclaration)[0] as ts.ClassDeclaration
+    const componentClassName = componentClassDecl.name?.text
     const entryFilePath = `${project.sourceRoot}/${entryFile}.ts`
     const entryFileText = tree.readText(entryFilePath)
     const entrySource = ts.createSourceFile(entryFilePath, entryFileText, ts.ScriptTarget.Latest, true)
-    const importChange = insertImport(entrySource, entryFilePath, 'EgPlugin', '@ng-plugins/eg-core-lib')
+    const importCoreChange = insertImport(entrySource, entryFilePath, 'EgPlugin', '@ng-plugins/eg-core-lib')
+    const importComponentChange = componentClassName ? insertImport(entrySource, entryFilePath, componentClassName, `./lib/${componentFileName.slice(0, -3)}`) : new NoopChange()
     const packageJson = tree.readJson(`${project.root}/package.json`) as JsonObject
     const packageName = packageJson.name as string
     const pluginExport =
@@ -28,7 +37,7 @@ function addPluginHookToEntryPoint(options: EgPluginLibraryOptions): Rule {
 export const plugin: EgPlugin = {
   id: '${packageName}',
   title: '${packageName}',
-  component: null,
+  component: ${componentClassName},
 }
 `
     type ExportNodes = ts.ExportAssignment | ts.ExportDeclaration | ts.ExportSpecifier | ts.NamedExports
@@ -41,13 +50,10 @@ export const plugin: EgPlugin = {
       ].includes(x.kind)
     }) as ((node: ts.Node) => node is ExportNodes))
     .sort((a, b) => a.getStart() - b.getStart())
-    console.log(exportNodes)
     const pluginExportChange = insertAfterLastOccurrence(exportNodes, pluginExport, entryFilePath, entrySource.end)
     const edit = tree.beginUpdate(entryFilePath)
-    applyToUpdateRecorder(edit, [ importChange, pluginExportChange ])
+    applyToUpdateRecorder(edit, [ importCoreChange, importComponentChange, pluginExportChange ].filter(x => !!x))
     tree.commitUpdate(edit)
-    console.log(exportNodes)
-    context.logger.info(`--- entry file ${entryFilePath}\n${entryFileText}`)
   }
 }
 
