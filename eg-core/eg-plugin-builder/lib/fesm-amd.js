@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -71,35 +82,77 @@ var rollup_1 = require("rollup");
 var discover_packages_1 = require("ng-packagr/lib/ng-package/discover-packages");
 var plugin_node_resolve_1 = require("@rollup/plugin-node-resolve");
 var plugin_commonjs_1 = __importDefault(require("@rollup/plugin-commonjs"));
-function ngPackagrThenAmd(options, context) {
+var promises_1 = require("fs/promises");
+function ngPackagrThenAmdPackage(options, context) {
+    var _this = this;
     return (0, rxjs_1.concat)((0, build_angular_1.executeNgPackagrBuilder)(options, context).pipe((0, operators_1.tap)(function (x) {
         if (x.error) {
             context.logger.error(x.error);
         }
-    })), (0, rxjs_1.defer)(function () { return rollupFesmToAmd(options, context); }));
+    })), (0, rxjs_1.defer)(function () { return __awaiter(_this, void 0, void 0, function () {
+        var buildInfo, rollupResult, packageJsonResult;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, resolveBuildInfo(options, context)];
+                case 1:
+                    buildInfo = _a.sent();
+                    return [4 /*yield*/, rollupFesmToAmd(buildInfo)];
+                case 2:
+                    rollupResult = _a.sent();
+                    if (rollupResult.success !== true) {
+                        return [2 /*return*/, rollupResult];
+                    }
+                    return [4 /*yield*/, writeDistPackageJson(buildInfo)];
+                case 3:
+                    packageJsonResult = _a.sent();
+                    return [2 /*return*/, packageJsonResult];
+            }
+        });
+    }); }));
 }
-function rollupFesmToAmd(options, context) {
+function resolveBuildInfo(options, context) {
     return __awaiter(this, void 0, void 0, function () {
-        var root, ngPackagePath, packages, destDir, fesm2020Path, fesm2020UmdName, fesm2020AmdPath, roller, rolled, _i, _a, rollOut, err_1;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
+        var root, ngPackagePath, packages, destDir, fesm2020Path, amdName, amdPath;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
                     root = context.workspaceRoot;
                     ngPackagePath = path.resolve(root, options.project);
                     return [4 /*yield*/, (0, discover_packages_1.discoverPackages)({ project: ngPackagePath })];
                 case 1:
-                    packages = _b.sent();
+                    packages = _a.sent();
                     destDir = packages.dest;
                     fesm2020Path = packages.primary.destinationFiles.fesm2020;
-                    fesm2020UmdName = "".concat(packages.primary.flatModuleFile, ".fesm2020.amd.js");
-                    fesm2020AmdPath = path.resolve(destDir, fesm2020UmdName);
+                    amdName = "".concat(packages.primary.flatModuleFile, ".amd.js");
+                    amdPath = path.resolve(destDir, amdName);
+                    return [2 /*return*/, {
+                            options: options,
+                            context: context,
+                            packages: packages,
+                            ngPackagePath: ngPackagePath,
+                            destDir: destDir,
+                            fesm2020Path: fesm2020Path,
+                            amdName: amdName,
+                            amdPath: amdPath
+                        }];
+            }
+        });
+    });
+}
+function rollupFesmToAmd(buildInfo) {
+    return __awaiter(this, void 0, void 0, function () {
+        var context, fesm2020Path, amdPath, roller, rolled, _i, _a, rollOut, err_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    context = buildInfo.context, fesm2020Path = buildInfo.fesm2020Path, amdPath = buildInfo.amdPath;
                     context.logger.info("rolling FESM2020 to AMD ".concat(JSON.stringify({
                         fesm2020Path: fesm2020Path,
-                        fesm2020AmdPath: fesm2020AmdPath
+                        amdPath: amdPath
                     }, null, 2)));
-                    _b.label = 2;
-                case 2:
-                    _b.trys.push([2, 5, , 6]);
+                    _b.label = 1;
+                case 1:
+                    _b.trys.push([1, 4, , 5]);
                     return [4 /*yield*/, (0, rollup_1.rollup)({
                             input: fesm2020Path,
                             plugins: [
@@ -116,13 +169,13 @@ function rollupFesmToAmd(options, context) {
                                 (0, plugin_commonjs_1["default"])()
                             ]
                         })];
-                case 3:
+                case 2:
                     roller = _b.sent();
                     return [4 /*yield*/, roller.write({
                             format: 'amd',
-                            file: fesm2020AmdPath
+                            file: amdPath
                         })];
-                case 4:
+                case 3:
                     rolled = _b.sent();
                     for (_i = 0, _a = rolled.output; _i < _a.length; _i++) {
                         rollOut = _a[_i];
@@ -131,7 +184,7 @@ function rollupFesmToAmd(options, context) {
                     return [2 /*return*/, {
                             success: true
                         }];
-                case 5:
+                case 4:
                     err_1 = _b.sent();
                     context.logger.error('error creating amd module from fesm: ' + err_1);
                     console.error(err_1);
@@ -139,9 +192,38 @@ function rollupFesmToAmd(options, context) {
                             success: false,
                             error: err_1
                         }];
-                case 6: return [2 /*return*/];
+                case 5: return [2 /*return*/];
             }
         });
     });
 }
-exports["default"] = (0, architect_1.createBuilder)(ngPackagrThenAmd);
+function writeDistPackageJson(buildInfo) {
+    return __awaiter(this, void 0, void 0, function () {
+        var distPkg, distPkgPath, distPkgContent, err_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    distPkg = __assign(__assign({}, buildInfo.packages.primary.packageJson), { main: buildInfo.amdName });
+                    distPkgPath = path.resolve(buildInfo.packages.primary.destinationPath, 'package.json');
+                    distPkgContent = JSON.stringify(distPkg, null, 2);
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    buildInfo.context.logger.info("writing dist package to ".concat(distPkgPath));
+                    return [4 /*yield*/, (0, promises_1.writeFile)(distPkgPath, distPkgContent)];
+                case 2:
+                    _a.sent();
+                    return [3 /*break*/, 4];
+                case 3:
+                    err_2 = _a.sent();
+                    buildInfo.context.logger.error("error writing dist package ".concat(distPkgPath, ": ").concat(err_2));
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/, {
+                        target: buildInfo.context.target,
+                        success: true
+                    }];
+            }
+        });
+    });
+}
+exports["default"] = (0, architect_1.createBuilder)(ngPackagrThenAmdPackage);
